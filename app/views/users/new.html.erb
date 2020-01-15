@@ -1,0 +1,72 @@
+<div class="text-center mb-5">
+  <!--<u><h1>会員登録</h1></u>-->
+  <h1><span style="border-bottom: solid 2px;">会員登録</span></h>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th><%= f.label :name, '名前' %></th>
+            <td><%= f.text_field :name, class: 'form-control' %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :email, 'メールアドレス' %></th>
+            <td><%= f.email_field :email, class: 'form-control' %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :password, 'パスワード' %></th>
+            <td><%= f.password_field :password, class: 'form-control' %></td>
+          </tr>
+          <th><%= f.label :password_confirmation, 'パスワード(確認用)' %></th>
+            <td><%= f.password_field :password_confirmation, class: 'form-control' %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :profile, 'プロフィール' %></th>
+            <td><%= f.text_area :profile, class: 'form-control', placeholder:"得意なことなど", size: "25x7" %></td>
+          </tr>
+        </tbody>
+      </table>
+      <%= f.submit '登録', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  </div>
+</div>
+
+<!--<div class="row">-->
+<!--  <div class="col-sm-6 offset-sm-3">-->
+
+<!--    <%= form_with(model: @user, local: true) do |f| %>-->
+      
+<!--      <div class="form-group">-->
+<!--        <%= f.label :name, '名前' %>-->
+<!--        <%= f.text_field :name, class: 'form-control' %>-->
+<!--      </div>-->
+
+<!--      <div class="form-group">-->
+<!--        <%= f.label :email, 'メールアドレス' %>-->
+<!--        <%= f.email_field :email, class: 'form-control' %>-->
+<!--      </div>-->
+
+<!--      <div class="form-group">-->
+<!--        <%= f.label :password, 'パスワード' %>-->
+<!--        <%= f.password_field :password, class: 'form-control' %>-->
+<!--      </div>-->
+
+<!--      <div class="form-group">-->
+<!--        <%= f.label :password_confirmation, 'パスワード(確認)' %>-->
+<!--        <%= f.password_field :password_confirmation, class: 'form-control' %>-->
+<!--      </div>-->
+      
+<!--      <div class="form-group">-->
+<!--        <%= f.label :profile, 'プロフィール' %>-->
+<!--        <%= f.text_area :profile, class: 'form-control', placeholder:"得意なことなど", size: "25x7" %>-->
+<!--      </div>-->
+
+<!--      <%= f.submit '登録', class: 'btn btn-primary btn-block' %>-->
+<!--    <% end %>-->
+<!--  </div>-->
+<!--</div>-->
+
