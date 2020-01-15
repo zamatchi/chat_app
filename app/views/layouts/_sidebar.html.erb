@@ -1,9 +1,11 @@
-<div class="col-sm-1 offset-sm-1 bg-light border-right">
-  <ul class="nav nav-pills nav-stacked">
-    <%= link_to "トップ", root_path %>
-    <li>ルーム作成</li>
-    <li>マイルーム</li>
-    <li>プロフィール</li>
-    <%= link_to "ログアウト", logout_path, method: :delete %>
-  </ul>
-</div>
+<!--<div class="col-sm-1 offset-sm-1 bg-light sidebar">-->
+  <aside>
+    <!--<ul class="nav nav-pills nav-stacked">-->
+    <ul class="list-unstyled">
+      <%= link_to "トップ", root_path %>
+      <li>ルーム作成</li>
+      <li>マイルーム</li>
+      <li>プロフィール</li>
+      <%= link_to "ログアウト", logout_path, method: :delete %>
+    </ul>
+  </aside>

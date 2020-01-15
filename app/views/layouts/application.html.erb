@@ -18,9 +18,14 @@
 
     <div class="container-fluid">
       <%= render 'layouts/flash_messages' %>
+    
         <div class="row">
-          <%= render 'layouts/sidebar' %>
-          <%= yield %>
+          <div class="col-sm-1 offset-sm-1 bg-light">
+            <%= render 'layouts/sidebar' %>
+          </div>
+          <div class="col-md-8">
+            <%= yield %>
+          </div>
         </div>
     </div>
     
@@ -29,5 +34,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
-
-
