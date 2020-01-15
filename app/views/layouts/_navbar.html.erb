@@ -7,9 +7,12 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
-        <li class="nav-item"><a href="#" class="nav-link small ">ログイン</a></li>
-        <li class="nav-item"><%= link_to "会員登録", signup_path, class: "nav-link small" %></li>
-        
+        <% if logged_in? %>
+          <li class="nav-item"><%= link_to current_user.name, user_path(current_user), class: "nav-link small" %></li>
+        <% else %>
+          <li class="nav-item"><%= link_to "ログイン", login_path, class: "nav-link small" %></li>
+          <li class="nav-item"><%= link_to "会員登録", signup_path, class: "nav-link small" %></li>
+        <% end %>
       </ul>
     </div>
   </nav>
