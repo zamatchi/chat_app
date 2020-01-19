@@ -1,11 +1,14 @@
-<!--<div class="col-sm-1 offset-sm-1 bg-light sidebar">-->
-  <aside>
-    <!--<ul class="nav nav-pills nav-stacked">-->
-    <ul class="list-unstyled">
-      <%= link_to "トップ", root_path %>
-      <li>ルーム作成</li>
+<aside>
+  <ul class="list-unstyled">
+    <% if logged_in? %>
+      <li><%= link_to "トップ", root_path %></li>
+      <li><%= link_to "ルーム作成", new_chatroom_path %></li>
       <li>マイルーム</li>
-      <li>プロフィール</li>
-      <%= link_to "ログアウト", logout_path, method: :delete %>
-    </ul>
-  </aside>
+      <li><%= link_to "プロフィール", user_path(@current_user) %></li>
+      <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
+    <% else %>
+      <li><%= link_to "会員登録", signup_path %></li>
+      <li><%= link_to "ログイン", login_path %></li>
+    <% end %>
+  </ul>
+</aside>

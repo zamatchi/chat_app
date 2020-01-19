@@ -10,7 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_15_095452) do
+ActiveRecord::Schema.define(version: 2020_01_18_052433) do
+
+  create_table "chatrooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "genre"
+    t.integer "target"
+    t.text "comment"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_chatrooms_on_user_id"
+  end
+
+  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "content"
+    t.bigint "user_id"
+    t.bigint "chatroom_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chatroom_id"], name: "index_posts_on_chatroom_id"
+    t.index ["user_id", "chatroom_id"], name: "index_posts_on_user_id_and_chatroom_id", unique: true
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "user_chatrooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "chatroom_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chatroom_id"], name: "index_user_chatrooms_on_chatroom_id"
+    t.index ["user_id", "chatroom_id"], name: "index_user_chatrooms_on_user_id_and_chatroom_id", unique: true
+    t.index ["user_id"], name: "index_user_chatrooms_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -22,4 +54,9 @@ ActiveRecord::Schema.define(version: 2020_01_15_095452) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "chatrooms", "users"
+  add_foreign_key "posts", "chatrooms"
+  add_foreign_key "posts", "users"
+  add_foreign_key "user_chatrooms", "chatrooms"
+  add_foreign_key "user_chatrooms", "users"
 end

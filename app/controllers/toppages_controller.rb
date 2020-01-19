@@ -1,5 +1,8 @@
 class ToppagesController < ApplicationController
   def index
-    @room
+    if logged_in?
+      @chatroom = Chatroom.new
+      @chatrooms = Chatroom.all
+    end
   end
 end

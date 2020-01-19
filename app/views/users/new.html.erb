@@ -9,22 +9,22 @@
       <tbody>
         <tr>
           <th><%= f.label :name, '名前' %></th>
-          <td><%= f.text_field :name, class: 'form-control' %></td>
+          <td><%= f.text_field :name, class: 'form-control border_none' %></td>
         </tr>
         <tr>
           <th><%= f.label :email, 'メールアドレス' %></th>
-          <td><%= f.email_field :email, class: 'form-control' %></td>
+          <td><%= f.email_field :email, class: 'form-control border_none' %></td>
         </tr>
         <tr>
           <th><%= f.label :password, 'パスワード' %></th>
-          <td><%= f.password_field :password, class: 'form-control' %></td>
+          <td><%= f.password_field :password, class: 'form-control border_none' %></td>
         </tr>
         <th><%= f.label :password_confirmation, 'パスワード(確認用)' %></th>
-          <td><%= f.password_field :password_confirmation, class: 'form-control' %></td>
+          <td><%= f.password_field :password_confirmation, class: 'form-control border_none' %></td>
         </tr>
         <tr>
           <th><%= f.label :profile, 'プロフィール' %></th>
-          <td><%= f.text_area :profile, class: 'form-control', placeholder:"得意なことなど", size: "25x7" %></td>
+          <td><%= f.text_area :profile, class: 'form-control border_none', placeholder:"得意なことなど", size: "25x7" %></td>
         </tr>
       </tbody>
     </table>

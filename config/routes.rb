@@ -7,4 +7,12 @@ Rails.application.routes.draw do
   
   get 'signup', to: 'users#new'
   resources :users, only: [:new, :create, :show]
+  
+  resources :chatrooms do
+    member do
+      get :users
+    end
+  end
+  
+  resources :user_chatrooms, only: [:create, :destroy]
 end

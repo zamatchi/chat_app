@@ -1,0 +1,39 @@
+<div class="text-center mb-5">
+  <h2><span style="border-bottom: solid 2px;"><%= yield(:title) %></span></h2>
+</div>
+
+<div class="box mx-auto">
+  <%= form_with(model: @chatroom, local: true) do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th><%= f.label :name, 'ルーム名前' %></th>
+          <td><%= f.text_field :name, class: 'form-control border_none' %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :genre, 'ジャンル' %></th>
+          <td><%= f.select :genre, Chatroom.genres.keys.to_a, {include_blank: true}, {class: 'form-control'} %></td>
+  
+        </tr>
+        <tr>
+          <th><%= f.label :target, 'ターゲット' %></th>
+          <td><%= f.select :target, Chatroom.targets.keys.to_a, {include_blank: true}, {class: 'form-control'} %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :comment, 'コメント' %></th>
+          <td><%= f.text_area :comment, class: 'form-control border_none', size: "25x7" %></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-right">
+      <%= f.submit yield(:button_name), class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
+
+<style>
+  .box{
+    width: 70%;
+  }
+</style>
