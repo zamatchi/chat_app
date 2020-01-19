@@ -5,7 +5,8 @@ class ChatroomsController < ApplicationController
   end
 
   def show
-    @chatroom = Chatroom.find(params[:id])
+    @posts = Post.all
+    # @chatroom = Chatroom.find(params[:id])
     # @chatroom = chatroom.post.all みたいなの
   end
 
@@ -25,7 +26,7 @@ class ChatroomsController < ApplicationController
     
     if @chatroom.save
       flash[:success] = "ルーム作成完了"
-      redirect_to root_path
+      redirect_to @chatroom
     else
       flash.now[:danger] = "ルーム作成失敗"
       render :new
