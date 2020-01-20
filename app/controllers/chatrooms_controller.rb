@@ -5,9 +5,11 @@ class ChatroomsController < ApplicationController
   end
 
   def show
-    @posts = Post.all
-    # @chatroom = Chatroom.find(params[:id])
-    # @chatroom = chatroom.post.all みたいなの
+    @chatroom = Chatroom.find(params[:id])
+    puts "==============================================================================="
+    puts @chatroom
+    puts "==============================================================================="
+    @posts = Post.where(chatroom_id: params[:id])
   end
 
   def edit

@@ -1,9 +1,12 @@
-<h1>Chat room</h1>
+<h1><%= "ルーム名: #{@chatroom.name}" %></h1>
 
-<input type="text" id="chat_input" />
+<input type="text" id="chat_input" data_user="<%= current_user.id %>" data_room="<%= @chatroom.id %>" />
 <button id="chat_button">送信</button>
-<!--<input type="text" id="chat_input" data-behavior="room_speaker">-->
 
 <div id="posts">
   <%= render @posts %>
 </div>
+
+
+
+

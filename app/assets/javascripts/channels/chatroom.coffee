@@ -12,16 +12,18 @@ App.chatroom = App.cable.subscriptions.create "ChatroomChannel",
     
     # Called when there's incoming data on the websocket for this channel
 
-  speak: (content) ->
-    @perform 'speak', message: content
+  speak: (content, data_user, data_room) ->
+    @perform 'speak', message: content, user_id: data_user, room_id: data_room
 
 
 document.addEventListener 'DOMContentLoaded', ->
   input = document.getElementById('chat_input')
+  data_user = document.getElementsByTagName("input")[0].getAttribute("data_user")
+  data_room = document.getElementsByTagName("input")[0].getAttribute("data_room")
   button = document.getElementById('chat_button')
   button.addEventListener 'click', ->
     content = input.value
-    App.chatroom.speak(content)
+    App.chatroom.speak(content, data_user, data_room)
     input.value = ''
     return
   return
