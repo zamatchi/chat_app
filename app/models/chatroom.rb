@@ -20,5 +20,5 @@ class Chatroom < ApplicationRecord
   has_many :user_chatrooms #ルーム入会者
   has_many :spoken_users, through: :user_chatrooms, source: :user
   has_many :posts
-  
+  has_many :questions
 end

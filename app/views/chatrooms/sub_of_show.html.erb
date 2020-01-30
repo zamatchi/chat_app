@@ -1,5 +1,5 @@
 <div class="text-center mb-5">
-  <h2><span style="border-bottom: solid 2px;"><%= @chatroom.name %>の部屋</span></h2>
+  <h2><span style="border-bottom: solid 2px;"><%= "#{@chatroom.name}の部屋" %></span></h2>
 </div>
 
 <div class="text-right">
@@ -15,50 +15,21 @@
   
     <!--タイムライン-->
     <div class="room_messages">
-  
-      <!--自分以外のチャット-->
-      <div class="room_message room_left">
-        <div class="room_message_box">
-          <div class="room_message_content">
-            <div class="room_message_text">
-              <%#= @user.name %>
-              メッセージ1メッセージ1メッセージ1メッセージ1メッセージ1メッセージ1メッセージ1メッセージ1メッセージ1メッセージ1メッセージ1メッセージ1メッセージ1メッセージ1メッセージ1メッセージ1
-            </div>
-          </div>
-        </div>
-        <div class="text-left">
-          <%#= link_to @user.name, user_path(user) %>
-        </div>
-      </div>
-      <div class="room_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
       
-      <div class="room_message room_right">
-        <div class="room_message_box">
-          <div class="room_message_content">
-            <div class="room_message_text">
-              メッセージ2メッセージ2メッセージ2メッセージ2メッセージ2メッセージ2メッセージ2メッセージ2メッセージ2メッセージ2メッセージ2メッセージ2メッセージ2
-            </div>
-          </div>
-        </div>
-        <div class="text-right">
-          <%= link_to current_user.name, user_path(current_user) %>
-        </div>
-      </div>
-      <div class="room_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
       
-    </div>
+      <div id="posts">
+        <%= render @posts %>
+      </div>
+   </div>
     
     <div class="room_send">
-      <%= form_with(model: @post, local: true) do |f| %>
-        <%= f.text_area :content, class: 'room_send_message' %>
-        <%= f.submit "送信", class: 'room_send_btn' %>
-      <% end %>
+      <textarea class="room_send_message" id="chat_input" data_user="<%= current_user.id %>" data_room="<%= @chatroom.id %>"></textarea>
+      <button id="chat_button" class="room_send_btn">送信</button>
     </div>
-    
   </div>
 </div>
 
-<style>
+<style scoped>
   /*チャット画面全体全体*/
   .box{
     height: 500px;

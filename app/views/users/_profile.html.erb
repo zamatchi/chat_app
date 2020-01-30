@@ -1,15 +1,31 @@
-<table class="table table-bordered">
-  <tbody>
-    <tr>
-      <th>名前</th>
-      <td><%= user.name %></td>
-    </tr>
-    <tr>
-    <tr>
-      <th>プロフィール</th>
-      <td><%= user.profile %></td>
-    </tr>
-  </tbody>
-</table>
+<div class="text-center mb-5">
+  <h2><span style="border-bottom: solid 2px;"><%= yield(:title) %></span></h2>
+</div>
 
-<%= link_to '編集', class: 'btn btn-light' %>
+<%= form_with(model: @user, local: true) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th><%= f.label :name, '名前' %></th>
+        <td><%= f.text_field :name, class: 'form-control border_none' %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :email, 'メールアドレス' %></th>
+        <td><%= f.email_field :email, class: 'form-control border_none' %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :password, 'パスワード' %></th>
+        <td><%= f.password_field :password, class: 'form-control border_none' %></td>
+      </tr>
+      <th><%= f.label :password_confirmation, 'パスワード(確認用)' %></th>
+        <td><%= f.password_field :password_confirmation, class: 'form-control border_none' %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :profile, 'プロフィール' %></th>
+        <td><%= f.text_area :profile, class: 'form-control border_none', placeholder:"得意なことなど", size: "25x7" %></td>
+      </tr>
+    </tbody>
+  </table>
+  <%= f.submit yield(:button), class: 'btn btn-primary btn-block' %>
+<% end %>

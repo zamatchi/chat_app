@@ -7,6 +7,7 @@ App.chatroom = App.cable.subscriptions.create "ChatroomChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
+    # alert data['message']
     $('#posts').append data['message']
     
     
@@ -14,16 +15,18 @@ App.chatroom = App.cable.subscriptions.create "ChatroomChannel",
 
   speak: (content, data_user, data_room) ->
     @perform 'speak', message: content, user_id: data_user, room_id: data_room
+    
 
-
-document.addEventListener 'DOMContentLoaded', ->
+# document.addEventListener 'DOMContentLoaded', ->
+document.addEventListener 'turbolinks:load', ->
   input = document.getElementById('chat_input')
-  data_user = document.getElementsByTagName("input")[0].getAttribute("data_user")
-  data_room = document.getElementsByTagName("input")[0].getAttribute("data_room")
-  button = document.getElementById('chat_button')
-  button.addEventListener 'click', ->
-    content = input.value
-    App.chatroom.speak(content, data_user, data_room)
-    input.value = ''
+  if input?
+    data_user = input.getAttribute("data_user")
+    data_room = input.getAttribute("data_room")
+    button = document.getElementById('chat_button')
+    button.addEventListener 'click', ->
+      content = input.value
+      App.chatroom.speak(content, data_user, data_room)
+      input.value = ''
+      return
     return
-  return

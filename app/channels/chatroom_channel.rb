@@ -10,9 +10,8 @@ class ChatroomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    # binding.pry
     message = Post.create! content: data['message'], user_id: data['user_id'], chatroom_id: data['room_id']
-    templete = ApplicationController.renderer.render(partial: 'posts/post', locals: { post: message })
+    templete = ApplicationController.renderer.render(partial: 'posts/post', locals: { post: message, current_user: current_user })
     ActionCable.server.broadcast 'chatroom_channel', message: templete
   end
 end

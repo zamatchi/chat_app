@@ -1,0 +1,26 @@
+<div class="col-sm-9">
+  <div class="text-center mb-5">
+    <h2><span style="border-bottom: solid 2px;"><%= yield(:title) %></span></h2>
+  </div>
+  
+  <%= form_with(model: @question, local: true) do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th><%= f.label :title, 'タイトル' %></th>
+          <td><%= f.text_field :title, class: 'form-control border_none' %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :detail, '詳細' %></th>
+          <td><%= f.text_area :detail, class: 'form-control border_none', placeholder:"内容を詳しく書いてみましょう。的確な回答を得やすくなります。", size: "25x7" %></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <%= f.hidden_field :chatroom_id, :value => chatroom_id %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    
+    <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+  <% end %>
+</div>

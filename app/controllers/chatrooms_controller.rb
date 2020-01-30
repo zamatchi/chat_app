@@ -6,10 +6,8 @@ class ChatroomsController < ApplicationController
 
   def show
     @chatroom = Chatroom.find(params[:id])
-    puts "==============================================================================="
-    puts @chatroom
-    puts "==============================================================================="
     @posts = Post.where(chatroom_id: params[:id])
+    @questions = Question.where(chatroom_id: params[:id])
   end
 
   def edit
@@ -17,6 +15,15 @@ class ChatroomsController < ApplicationController
   end
 
   def update
+    @chatroom = Chatroom.find(params[:id])
+    
+    if @chatroom.update(chatroom_params)
+      flash[:success] = "編集しました"
+      redirect_to @chatroom
+    else
+      flash.now[:danger] = "編集に失敗しました"
+      render :edit
+    end
   end
   
   def new

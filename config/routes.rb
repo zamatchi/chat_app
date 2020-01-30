@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   
   get 'signup', to: 'users#new'
-  resources :users, only: [:new, :create, :show]
+  resources :users, only: [:new, :create, :show, :edit, :update]
   
   resources :chatrooms do
     member do
@@ -14,8 +14,9 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :user_chatrooms, only: [:create, :destroy]
+  resources :questions
+  
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'
-  
-  resources :user_chatrooms, only: [:create, :destroy]
 end

@@ -6,7 +6,7 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.references :chatroom, foreign_key: true
 
       t.timestamps
-      t.index [:user_id, :chatroom_id], unique: true
+      t.index [:user_id, :chatroom_id], unique: true #削除済
     end
   end
 end
