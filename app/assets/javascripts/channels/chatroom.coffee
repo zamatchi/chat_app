@@ -19,7 +19,6 @@ App.chatroom = App.cable.subscriptions.create "ChatroomChannel",
 
 document.addEventListener 'turbolinks:load', ->
   input = document.getElementById('chat_input')
-  console.log "AAA"
   if input?
     # location.hash = "choice"
     
