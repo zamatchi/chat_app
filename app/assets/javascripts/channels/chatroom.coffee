@@ -20,7 +20,10 @@ App.chatroom = App.cable.subscriptions.create "ChatroomChannel",
 # document.addEventListener 'DOMContentLoaded', ->
 document.addEventListener 'turbolinks:load', ->
   input = document.getElementById('chat_input')
+
   if input?
+    # location.hash = "choice"
+    
     data_user = input.getAttribute("data_user")
     data_room = input.getAttribute("data_room")
     button = document.getElementById('chat_button')
@@ -28,5 +31,6 @@ document.addEventListener 'turbolinks:load', ->
       content = input.value
       App.chatroom.speak(content, data_user, data_room)
       input.value = ''
+      
       return
     return

@@ -5,6 +5,7 @@
   </ul>
   
   <%= render 'users/info', user: @user %>
-  
-  <%= link_to '編集', edit_user_path(@user), class: 'btn btn-light' %>
+  <% if current_user == @user %>
+    <%= link_to '編集', edit_user_path(@user), class: 'btn btn-light' %>
+  <% end %>
 </div>

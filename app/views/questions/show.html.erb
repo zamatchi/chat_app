@@ -1,14 +1,80 @@
 <div class="col-sm-9">
-  <div>ユーザーネーム: <%= link_to @user.name, user_path(@user) %></div>
+  <div>
+    <div class="pb-3"><%= link_to "ルームへ戻る", chatroom_path(@chatroom), class: "btn btn-primary btn-sm" %></div>
+    <div>ユーザーネーム: <%= link_to @user.name, user_path(@user) %></div>
+    
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th>タイトル</th>
+          <td><%= @question.title %></td>
+        </tr>
+        <tr>
+          <th>詳細</th>
+          <td><%= @question.detail %></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-right">
+      <% if current_user == @user %>
+        <%= link_to "編集", edit_question_path(@question), class: "btn btn-info btn-sm" %>
+        <%= link_to "削除", @question, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn btn-danger btn-sm" %>
+      <% end %>
+      <% if logged_in? %><%= link_to "回答する", new_answer_path(question_id: @question.id), class: "btn btn-success btn-sm" %><% end %>
+    </div>
+  </div>
   
-  <div><p>タイトル: <%= @question.title %></p></div>
+  <div>
+    <div class="pb-2">
+      <h4 class="underline">ベストアンサー</h4>
+    </div>
+    <% if @bestanswer %>
+      <div class="border-answer">
+        <%= simple_format(h(@bestanswer.answer), {}, wrapper_tag: "div") %>
+        <div class="text-right">
+          <%= render 'questions/answer_list', {question: @question}  %>
+        </div>
+      </div>
+    <% else %>
+      <p class="border-answer">まだベストアンサーはありません。</p>
+    <% end %>  
+  </div>
   
-  <div><p>詳細: <%= @question.detail %></p></div>
-  
-  <div>回答する</div>
-  <!--answerテーブルの作成-->
-  
-  <div>ベストアンサー</div>
-  
-  <div>回答一覧</div>
+  <div>
+    <div class="pb-2 pt-5">
+      <h4 class="underline">回答一覧</h4>
+    </div>
+    <% @answers.each do |answer| %>
+      <% unless answer == @bestanswer %>
+        <div class="border-answer mb-3">
+          <%= simple_format(h(answer.answer), {}, wrapper_tag: "div") %>
+          <div class="text-right">
+            <% if current_user == answer.user %>
+              <%= link_to "編集", edit_answer_path(answer), class: "btn btn-info btn-sm" %>
+              <%= link_to "削除", answer, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn btn-danger btn-sm" %>
+            <% end %>
+            
+            <% unless @bestanswer %>
+                <%= render 'questions/answer_list', {question: @question, answer: answer}  %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
+
+<style>
+  .border-answer {
+    border-bottom: 2px solid #dee2e6;
+  }
+  
+  .underline:after {
+    background-color: #BAD3FF; /* 線色 */
+    border-radius: 4px; /* 線幅の半分 */
+    content: "";
+    display: block;
+    height: 10px; /* 線幅 */
+}
+  
+</style>

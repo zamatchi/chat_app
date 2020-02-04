@@ -1,0 +1,3 @@
+class Toppage < ApplicationRecord
+  
+end

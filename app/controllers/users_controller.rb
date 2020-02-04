@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:show]
+  before_action :correct_user, only: [:edit, :update]
+  before_action :set_user, only: [:show]
   def show
-    @user = User.find(params[:id])
   end
   
   def new
@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     
     if @user.save
+      session[:user_id] = @user.id
       flash[:success] = "登録完了しました"
       redirect_to root_path
     else
@@ -21,12 +22,9 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find(params[:id])
   end
   
   def update
-    @user = User.find(params[:id])
-    
     if @user.update(user_params)
       flash[:success] = "更新しました"
       redirect_to @user
@@ -40,5 +38,16 @@ class UsersController < ApplicationController
   
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile)
+  end
+  
+  def set_user
+    @user = User.find(params[:id])
+  end
+  
+  def correct_user
+    @user = User.find(params[:id])
+    unless current_user == @user
+      redirect_to root_path
+    end
   end
 end

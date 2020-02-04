@@ -4,14 +4,12 @@
     <div class="room_message_box">
       <div class="room_message_content">
         <div class="room_message_text">
-          <%# unless post.user_id == current_user.id %>
-            <p style="color:blue;"><%= post.content %></p>
-          <%# end %>
+          <p style="color:blue;" class="hello"><%= post.content %></p>
         </div>
       </div>
     </div>
     <div class="text-left">
-      <%#= link_to @user.name, user_path(user) %>
+      <%= link_to post.user.name, user_path(post.user) %>
     </div>
   </div>
   <div class="room_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
@@ -22,9 +20,7 @@
     <div class="room_message_box">
       <div class="room_message_content">
         <div class="room_message_text">
-          <%# if post.user_id == current_user.id %>
-            <p style="color:red;"><%= post.content %></p>
-          <%# end %>
+          <p style="color:red;" name="hello"><%= post.content %></p>
         </div>
       </div>
     </div>

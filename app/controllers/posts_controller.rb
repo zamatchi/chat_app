@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :register_chatroom_id, only: [:new]
+  before_action :require_user_logged_in
   
   def index
     @posts = Post.all
@@ -21,10 +21,5 @@ class PostsController < ApplicationController
   
   def post_params
     params.require(:post).permit(:content)
-  end
-  
-  def register_chatroom_id
-    @chatroom = Chatroom.find(params[:id])
-    params[:chatroom_id] = @chatroom.id
   end
 end

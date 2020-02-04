@@ -1,4 +1,4 @@
-<p>質問一覧</p>
+<p><%= yield(:title) %></p>
 <ul style="list-style: none;">
   <% questions.each do |question| %>
     <li><%= link_to question.title, question_path(question) %></li>

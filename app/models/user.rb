@@ -8,11 +8,11 @@ class User < ApplicationRecord
   
   
   # チャットルームの入室履歴・削除
-  has_many :chatrooms #作成したルーム
+  has_many :chatrooms, dependent: :destroy #作成したルーム
   
-  has_many :user_chatrooms #入っているルーム
-  has_many :chatting_rooms, through: :user_chatrooms, source: :chatroom
-  has_many :posts
+  has_many :user_chatrooms, dependent: :destroy #入っているルーム
+  has_many :chatting_rooms, through: :user_chatrooms, source: :chatroom, dependent: :destroy
+  has_many :posts, dependent: :destroy
   
   def join(chatroom)
     self.user_chatrooms.find_or_create_by(chatroom_id: chatroom.id)
@@ -27,5 +27,6 @@ class User < ApplicationRecord
     self.chatting_rooms.include?(chatroom)
   end
   
-  has_many :questions
+  has_many :questions, dependent: :destroy
+  has_many :answers, dependent: :destroy
 end

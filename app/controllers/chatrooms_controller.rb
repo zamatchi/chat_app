@@ -1,29 +1,9 @@
 class ChatroomsController < ApplicationController
-  
-  
-  def index
-  end
-
-  def show
-    @chatroom = Chatroom.find(params[:id])
-    @posts = Post.where(chatroom_id: params[:id])
-    @questions = Question.where(chatroom_id: params[:id])
-  end
-
-  def edit
-    @chatroom = Chatroom.find(params[:id])
-  end
-
-  def update
-    @chatroom = Chatroom.find(params[:id])
+  before_action :require_user_logged_in, only: [:new, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_chatroom, only: [:show]
     
-    if @chatroom.update(chatroom_params)
-      flash[:success] = "編集しました"
-      redirect_to @chatroom
-    else
-      flash.now[:danger] = "編集に失敗しました"
-      render :edit
-    end
+  def index
   end
   
   def new
@@ -42,17 +22,46 @@ class ChatroomsController < ApplicationController
     end
   end
 
-  def destroy
+  def show
+    @posts = Post.where(chatroom_id: params[:id])
+    @questions = Question.where(chatroom_id: params[:id]).limit(10).order('id DESC')
   end
-  
-  def users
-    @chatroom = Chatroom.find(params[:id])
-    @joinings = @chatroom.spoken_user
+
+  def edit
+  end
+
+  def update
+    
+    if @chatroom.update(chatroom_params)
+      flash[:success] = "編集しました"
+      redirect_to @chatroom
+    else
+      flash.now[:danger] = "編集に失敗しました"
+      render :edit
+    end
+  end
+
+  def destroy
+    @chatroom.destroy
+    
+    flash[:success] = 'ルームは削除されました'
+    redirect_to root_url
   end
   
   private
   
   def chatroom_params
     params.require(:chatroom).permit(:name, :genre, :target, :comment)
+  end
+  
+  def set_chatroom
+    @chatroom = Chatroom.find(params[:id])
+  end
+  
+  def correct_user
+    @chatroom = current_user.chatrooms.find_by(id: params[:id])
+    unless @chatroom
+      redirect_to root_path
+    end
   end
 end

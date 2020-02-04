@@ -3,4 +3,5 @@ class Question < ApplicationRecord
   validates :detail, presence: true
   belongs_to :user
   belongs_to :chatroom
+  has_many :answers, dependent: :destroy
 end

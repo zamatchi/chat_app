@@ -1,8 +1,7 @@
 class ToppagesController < ApplicationController
   def index
-    if logged_in?
-      @chatroom = Chatroom.new
-      @chatrooms = Chatroom.all
-    end
+    @setting = ActiveSupport::OrderedOptions.new
+    @setting.name = params[:name]
+    @chatrooms = Chatroom.search(params[:name]).page(params[:page]).per(15)
   end
 end

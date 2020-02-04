@@ -1,0 +1,36 @@
+<div class="col-sm-9">
+  <div>
+    <div>ユーザーネーム: <%= link_to @user.name, user_path(@user) %></div>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th>タイトル</th>
+          <td><%= @question.title %></td>
+        </tr>
+        <tr>
+          <th>詳細</th>
+          <td><%= @question.detail %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div>
+    <%= form_with(model: @answer, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      <table class="table table-bordered">
+        <tbody>
+          <th class="text-center"><%= f.label :answer, "回答" %></th>
+          <td><%= f.text_area :answer, class: "form-control border_none", size: "25x7" %></td>
+        </tbody>
+      </table>
+      
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+      <%= f.hidden_field :question_id, :value => @question.id %>
+      
+      <div class="text-right">
+        <%= f.submit "回答", class: "btn btn-success" %>
+      </div> 
+    <% end %>
+  </div>
+</div>

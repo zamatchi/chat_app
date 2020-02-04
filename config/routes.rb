@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   
   resources :user_chatrooms, only: [:create, :destroy]
   resources :questions
+  resources :answers, only: [:new, :create, :edit, :update, :destroy]
   
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'

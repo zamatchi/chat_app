@@ -18,7 +18,17 @@ class Chatroom < ApplicationRecord
 
   belongs_to :user #ルーム作成者
   has_many :user_chatrooms #ルーム入会者
-  has_many :spoken_users, through: :user_chatrooms, source: :user
-  has_many :posts
-  has_many :questions
+  has_many :spoken_users, through: :user_chatrooms, source: :user, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :questions, dependent: :destroy
+  
+  # Toppage/indexで使用
+  def self.search(name)
+    if name
+      Chatroom.where(['name LIKE ?', "%#{name}%"])
+    else
+      Chatroom.all
+    end
+  end
+  
 end

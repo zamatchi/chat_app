@@ -21,6 +21,6 @@
     <%= f.hidden_field :chatroom_id, :value => chatroom_id %>
     <%= f.hidden_field :user_id, :value => current_user.id %>
     
-    <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+    <%= f.submit yield(:button), class: 'btn btn-primary btn-block' %>
   <% end %>
 </div>
