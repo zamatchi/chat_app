@@ -3,7 +3,7 @@
     <% if logged_in? %>
       <li><%= link_to "トップ", root_path %></li>
       <li><%= link_to "ルーム作成", new_chatroom_path %></li>
-      <li>マイルーム</li>
+      <!--<li>マイルーム</li>-->
       <li><%= link_to "プロフィール", user_path(@current_user) %></li>
       <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
     <% else %>
