@@ -1,6 +1,5 @@
 class AnswersController < ApplicationController
   before_action :require_user_logged_in
-  before_action :set_answer_question, only: [:edit, :update, :destroy]
   def new
     @question = Question.find(params[:question_id])
     @user = @question.user
@@ -59,13 +58,4 @@ class AnswersController < ApplicationController
     params.require(:answer).permit(:answer, :user_id, :question_id)
   end
   
-  def set_answer_question
-    # binding.pry
-  
-    # @question = Question.find(params[:question_id])
-    # @answer = @question.answers.find(params[:question_id])
-    # @user = @question.user
-    # @answer = Answer.find(params[:id])
-    # @question = @answer.question
-  end
 end

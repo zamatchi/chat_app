@@ -1,4 +1,4 @@
-<div class="col-sm-9">
+<div class="col-sm-9 offset-sm-1">
   <div class="text-center mb-5">
     <h2><span style="border-bottom: solid 2px;"><%= yield(:title) %></span></h2>
   </div>
@@ -24,3 +24,4 @@
     <%= f.submit yield(:button), class: 'btn btn-primary btn-block' %>
   <% end %>
 </div>
+<div class="col-sm-2"></div>
