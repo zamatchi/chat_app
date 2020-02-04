@@ -20,7 +20,7 @@
         <%= link_to "編集", edit_question_path(@question), class: "btn btn-info btn-sm" %>
         <%= link_to "削除", @question, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn btn-danger btn-sm" %>
       <% end %>
-      <% if logged_in? %><%= link_to "回答する", new_answer_path(question_id: @question.id), class: "btn btn-success btn-sm" %><% end %>
+      <% if logged_in? %><%= link_to "回答する", new_question_answer_path(question_id: @question.id), class: "btn btn-success btn-sm" %><% end %>
     </div>
   </div>
   
@@ -50,8 +50,8 @@
           <%= simple_format(h(answer.answer), {}, wrapper_tag: "div") %>
           <div class="text-right">
             <% if current_user == answer.user %>
-              <%= link_to "編集", edit_answer_path(answer), class: "btn btn-info btn-sm" %>
-              <%= link_to "削除", answer, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn btn-danger btn-sm" %>
+              <%= link_to "編集", edit_question_answer_path(answer), class: "btn btn-info btn-sm" %>
+              <%= link_to "削除", [@question, answer], method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn btn-danger btn-sm" %>
             <% end %>
             
             <% unless @bestanswer %>

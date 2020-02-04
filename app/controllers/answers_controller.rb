@@ -9,7 +9,8 @@ class AnswersController < ApplicationController
 
   def create
     @answer = Answer.new(answer_params)
-    @question = Question.find(params[:answer][:question_id])
+    @question = Question.find(params[:question_id])
+    # @question = Question.find(params[:answer][:question_id])
     @user = @question.user
 
     if @answer.save
@@ -22,9 +23,16 @@ class AnswersController < ApplicationController
   end
 
   def edit
+    @question = Question.find(params[:id])
+    @answer = @question.answers.find(params[:question_id])
+    
+    @user = @question.user
   end
 
   def update
+    @question = Question.find(params[:question_id])
+    @answer = Answer.find(params[:id])
+
     if @answer.update(answer_params)
       flash[:success] = "回答を更新しました。"
       redirect_to @question
@@ -36,6 +44,9 @@ class AnswersController < ApplicationController
   
 
   def destroy
+    # binding.pry
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
     @answer.destroy
     
     flash[:success] = "回答を削除しました。"
@@ -49,8 +60,12 @@ class AnswersController < ApplicationController
   end
   
   def set_answer_question
-    @answer = Answer.find(params[:id])
-    @question = @answer.question
-    @user = @question.user
+    # binding.pry
+  
+    # @question = Question.find(params[:question_id])
+    # @answer = @question.answers.find(params[:question_id])
+    # @user = @question.user
+    # @answer = Answer.find(params[:id])
+    # @question = @answer.question
   end
 end
