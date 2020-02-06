@@ -7,7 +7,7 @@
     <tr>
     <tr>
       <th>プロフィール</th>
-      <td><%= user.profile %></td>
+      <td><%= simple_format(h(text_url_to_link(user.profile).html_safe), {}, {wrapper_tag: "div", sanitize: false}) %></td>
     </tr>
   </tbody>
 </table>

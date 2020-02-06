@@ -15,7 +15,6 @@
           <tr>
             <th><%= f.label :genre, 'ジャンル' %></th>
             <td><%= f.select :genre, Chatroom.genres.keys.to_a, {include_blank: true}, {class: 'form-control'} %></td>
-    
           </tr>
           <tr>
             <th><%= f.label :target, 'ターゲット' %></th>

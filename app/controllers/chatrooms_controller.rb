@@ -24,7 +24,7 @@ class ChatroomsController < ApplicationController
 
   def show
     @posts = Post.where(chatroom_id: params[:id])
-    @questions = Question.where(chatroom_id: params[:id]).limit(10).order('id DESC')
+    @questions = Question.where(chatroom_id: params[:id]).limit(20).order('id DESC')
   end
 
   def edit

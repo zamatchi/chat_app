@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   resources :questions do
     resources :answers, only: [:new, :create, :edit, :update, :destroy]
   end
-  # resources :answers, only: [:new, :create, :edit, :update, :destroy]
   
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'

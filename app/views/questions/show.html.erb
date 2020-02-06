@@ -1,6 +1,10 @@
-<div class="col-sm-9">
+<div class="col-sm-9 offset-sm-1">
   <div>
-    <div class="pb-3"><%= link_to "ルームへ戻る", chatroom_path(@chatroom), class: "btn btn-primary btn-sm" %></div>
+    <div class="mb-3">
+      <span style="border-bottom: solid 1px;"><%= "#{@chatroom.name}の部屋" %></span>
+      <%= link_to "ルームへ戻る", chatroom_path(@chatroom), class: "btn btn-primary btn-sm ml-2" %>
+    </div>
+    <div class="pb-3"></div>
     <div>ユーザーネーム: <%= link_to @user.name, user_path(@user) %></div>
     
     <table class="table table-bordered">
@@ -11,7 +15,7 @@
         </tr>
         <tr>
           <th>詳細</th>
-          <td><%= @question.detail %></td>
+          <td><%= simple_format(h(text_url_to_link(@question.detail).html_safe), {}, {wrapper_tag: "div", sanitize: false}) %></td>
         </tr>
       </tbody>
     </table>
@@ -30,7 +34,7 @@
     </div>
     <% if @bestanswer %>
       <div class="border-answer">
-        <%= simple_format(h(@bestanswer.answer), {}, wrapper_tag: "div") %>
+        <%= simple_format(h(text_url_to_link(@bestanswer.answer).html_safe), {}, {wrapper_tag: "div", sanitize: false}) %>
         <div class="text-right">
           <%= render 'questions/answer_list', {question: @question}  %>
         </div>
@@ -47,7 +51,7 @@
     <% @answers.each do |answer| %>
       <% unless answer == @bestanswer %>
         <div class="border-answer mb-3">
-          <%= simple_format(h(answer.answer), {}, wrapper_tag: "div") %>
+          <%= simple_format(h(text_url_to_link(answer.answer).html_safe), {}, {wrapper_tag: "div", sanitize: false}) %> <!--改行+リンク化-->
           <div class="text-right">
             <% if current_user == answer.user %>
               <%= link_to "編集", edit_question_answer_path(answer), class: "btn btn-info btn-sm" %>

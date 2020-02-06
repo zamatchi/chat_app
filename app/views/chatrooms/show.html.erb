@@ -1,6 +1,6 @@
-<div class="col-sm-8 offset-sm-1">
+<div class="col-sm-8">
   <div class="text-center mb-5">
-    <h2><span style="border-bottom: solid 2px;"><%= "#{@chatroom.name}の部屋" %></span></h2>
+    <h2><span style="border-bottom: solid 1px;"><%= "#{@chatroom.name}の部屋" %></span></h2>
   </div>
   
   <% if current_user == @chatroom.user %>
@@ -21,7 +21,8 @@
         <div class="room_messages">
           
           <div id="posts">
-            <%= render @posts %>
+            <%#= render @posts %>
+            <%= render 'posts/post', posts: @posts %>
           </div>
           <!--<p name="choice"></p> 「location.hash使えなかった」-->
        </div>
@@ -39,16 +40,19 @@
 </div>
 
 <div class="col-sm-3">
-  <%= link_to "質問一覧", questions_path(chatroom_id: @chatroom.id) %>
+  <div style="padding-top: 100px;">
+    <div class="text-center">質問一覧</span></div>
+    <%= render 'questions/questions_list', questions: @questions %>
+  </div>
   
-  <% provide(:title, '最新質問10件') %>
-  <%= render 'questions/questions_list', questions: @questions %>
-  
-  <% if logged_in? %>
-    <%= link_to "質問する", new_question_path(chatroom_id: @chatroom.id), class: "btn btn-success btn-sm" %> <!--_path(引数)により、question#newでparams[:chatroom_id]に@chatroom.idを届けている-->
-  <% end %>
+  <div>
+    <%= link_to "質問一覧", questions_path(chatroom_id: @chatroom.id), class: "btn btn-primary btn-sm" %>
+    <% if logged_in? %>
+      <%= link_to "質問する", new_question_path(chatroom_id: @chatroom.id), class: "btn btn-success btn-sm" %> <!--_path(引数)により、question#newでparams[:chatroom_id]に@chatroom.idを届けている-->
+    <% end %>
+  </div>
 </div>
-
+ <div class="offset-sm-1"></div>
 
 <style>
   /*チャット画面全体全体*/

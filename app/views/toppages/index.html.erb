@@ -3,15 +3,29 @@
     <div class="text-center">
       <h1>コミュニティーサーチ</h1>
       <section>
-        <p>・自分で好きなコミュニティーを作成・検索<br>
-        ・コミュニティー内でチャット・質問</p>
+        <p>自分で好きなコミュニティーを作成・検索<br>
+        コミュニティー内でチャット・質問</p>
+        
+        <div class="border-bottom">ジャンル > 難易度 > コメント</div>
+        で表示しています。
+        
       </section>
     </div>
   </div>
   <%= form_with(local: true, method: :get) do |f| %>
     <div class="form-group">
-      <%= f.label :name, 'ルーム検索' %>
-      <%= f.text_field :name, value: @setting.name, class: 'form-control' %>
+      <div>
+        <%= f.label :name, 'ルーム検索' %>
+        <%= f.text_field :name, value: @setting.name, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :genre, 'ジャンル' %></th>
+        <%= f.select :genre, Chatroom.genres.keys.to_a, {include_blank: true, selected: @setting.genre}, {class: 'form-control'} %>
+      </div>
+      <div>
+        <%= f.label :target, 'ターゲット' %></th>
+        <%= f.select :target, Chatroom.targets.keys.to_a, {include_blank: true, selected: @setting.target}, {class: 'form-control'} %>
+      </div>
       <div class="text-right">
         <%= f.submit "検索", class: "btn btn-primary" %>
       </div>
@@ -21,8 +35,8 @@
   <div class="room_name">
     <ul class="list-unstyled">
       <%= render @chatrooms %>
-      <%= paginate @chatrooms %>
     </ul>
+    <%= paginate @chatrooms %>
   </div>
 </div>
 <div class="col-sm-3"></div>

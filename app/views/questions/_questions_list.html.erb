@@ -1,6 +1,15 @@
-<p><%= yield(:title) %></p>
-<ul style="list-style: none;">
-  <% questions.each do |question| %>
-    <li><%= link_to question.title, question_path(question) %></li>
+<h3 class="text-center"><span style="border-bottom: solid 2px;"><%= yield(:title) %></span></h3>
+
+<div>
+  <% questions.each_with_index do |question, num| %>
+    <% if question.bestanswer == nil %>
+      <div class="border-right border-bottom">
+        <span style="color: red;">|未|</span> <%= num + 1 %>: <%= link_to question.title, question_path(question) %>
+      </div>
+    <% else %>
+      <div class="border-right border-bottom">
+        <span style="color: gray;">|済|</span> <%= num + 1 %>: <%= link_to question.title, question_path(question) %>
+      </div>
+    <% end %>
   <% end %>
-</ul>
+</div>

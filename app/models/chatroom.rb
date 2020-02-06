@@ -3,11 +3,17 @@ class Chatroom < ApplicationRecord
   
   enum genre: {
     '英語': 1,
-    '音楽': 2,
-    '趣味': 3,
-    'スポーツ': 4,
-    'ビジネス': 5,
-    'その他': 6
+    '外国': 2,
+    '健康': 3,
+    '趣味': 4,
+    '本': 5,
+    'アーティスト': 6,
+    'イベント': 7,
+    'お笑い': 8,
+    'スポーツ': 9,
+    'ビジネス': 10,
+    'プログラミング': 11,
+    'その他': 12
   }
   
   enum target: {
@@ -22,13 +28,24 @@ class Chatroom < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :questions, dependent: :destroy
   
-  # Toppage/indexで使用
-  def self.search(name)
-    if name
-      Chatroom.where(['name LIKE ?', "%#{name}%"])
+  
+  def self.search(name,genre,target)
+    if name.blank? && genre.blank? && target.blank?
+      Chatroom.all.order(id: "DESC")
+    elsif name.blank? && genre.blank?
+      Chatroom.where('target LIKE ?', "#{target}").order(id: "DESC")
+    elsif name.blank? && target.blank?
+      Chatroom.where('genre LIKE ?', "#{genre}").order(id: "DESC")
+    elsif genre.blank? && target.blank?
+      Chatroom.where('name LIKE ?', "%#{name}%").order(id: "DESC")
+    elsif target.blank?
+      Chatroom.where('name LIKE ? and genre LIKE ?', "%#{name}%", "#{genre}").order(id: "DESC")
+    elsif genre.blank?
+      Chatroom.where('name LIKE ? and target LIKE ?', "%#{name}%", "#{target}").order(id: "DESC")
+    elsif name.blank?
+      Chatroom.where('genre LIKE ? and target LIKE ?', "#{genre}", "#{target}").order(id: "DESC")
     else
-      Chatroom.all
+      Chatroom.where('name LIKE ? and genre LIKE ? and target LIKE ?' , "%#{name}%", "#{genre}", "#{target}").order(id: "DESC")
     end
   end
-  
 end

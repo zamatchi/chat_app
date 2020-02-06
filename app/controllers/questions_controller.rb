@@ -4,7 +4,8 @@ class QuestionsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
   
   def index
-    @questions = Question.where(chatroom_id: params[:chatroom_id]).order('id DESC')
+    @questions = Question.where(chatroom_id: params[:chatroom_id]).order('id DESC').page(params[:page]).per(25)
+    @chatroom = Chatroom.find(params[:chatroom_id])
   end
   
   def show
