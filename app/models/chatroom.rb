@@ -36,7 +36,7 @@ class Chatroom < ApplicationRecord
       Chatroom.where('target LIKE ?', "#{target}").order(id: "DESC")
     elsif name.blank? && target.blank?
       # Chatroom.where('genre LIKE ?', "#{genre}").order(id: "DESC")
-      Chatroom.where('cast(genre1 as text) LIKE ?', "#{genre}").order(id: "DESC")
+      Chatroom.where('cast(genre as text) LIKE ?', "#{genre}").order(id: "DESC")
     elsif genre.blank? && target.blank?
       Chatroom.where('name LIKE ?', "%#{name}%").order(id: "DESC")
     elsif target.blank?
