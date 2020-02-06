@@ -8,11 +8,11 @@
 
 # User.create!(name: "ユーザー10", email: "user10@exsample.com", password: "user10", password_confirmation: "user10", profile: "ユーザー10です")
 
-10.times do |n|
-  name = "Exsample#{n+100}"
+50.times do |n|
+  name = "サンプル#{n+1}"
   genre = rand(1..12)
   target = rand(1..3)
-  comment = "お試しルーム#{n+100}。"
-  user_id = 2
+  comment = "お試しルーム#{n+1}。"
+  user_id = 1
   Chatroom.create!(name: name, genre: genre, target: target, comment: comment, user_id: user_id)
 end
