@@ -7,26 +7,27 @@ class User < ApplicationRecord
   has_secure_password
   
   
-  # チャットルームの入室履歴・削除
   has_many :chatrooms, dependent: :destroy #作成したルーム
   
-  has_many :user_chatrooms, dependent: :destroy #入っているルーム
-  has_many :chatting_rooms, through: :user_chatrooms, source: :chatroom, dependent: :destroy
-  has_many :posts, dependent: :destroy
+  has_many :user_chatrooms, dependent: :destroy #お気に入りルーム
+  has_many :favoritings, through: :user_chatrooms, source: :chatroom, dependent: :destroy
   
-  def join(chatroom)
+  
+  has_many :posts, dependent: :destroy
+
+  has_many :questions, dependent: :destroy
+  has_many :answers, dependent: :destroy
+  
+  def favorite(chatroom)
     self.user_chatrooms.find_or_create_by(chatroom_id: chatroom.id)
   end
   
-  def unjoin(chatroom)
+  def unfavorite(chatroom)
     chatroom = self.user_chatrooms.find_by(chatroom_id: chatroom.id)
     chatroom.destroy if chatroom
   end
   
-  def joining?(chatroom)
-    self.chatting_rooms.include?(chatroom)
+  def favoriting?(chatroom)
+    self.favoritings.include?(chatroom)
   end
-  
-  has_many :questions, dependent: :destroy
-  has_many :answers, dependent: :destroy
 end

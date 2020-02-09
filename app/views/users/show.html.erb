@@ -1,7 +1,7 @@
 <div class="col-sm-9 offset-sm-1">
   <ul class="nav nav-tabs nav-justified mb-3">
-    <li class="nav-item"><%= link_to @user.name, user_path(@user) %></li>
-    <!--<li class="nav-item"><a href="#" class="nav-link">お気に入りルーム</a></li>-->
+    <li class="nav-item nav-link active"><%= link_to @user.name, user_path(@user) %></li>
+    <li class="nav-item nav-link"><%= link_to "マイルーム", myrooms_user_path(@user) %></li>
   </ul>
   
   <%= render 'users/info', user: @user %>

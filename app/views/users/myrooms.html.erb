@@ -1,0 +1,10 @@
+<div class="col-sm-9 offset-sm-1">
+  <ul class="nav nav-tabs nav-justified mb-3">
+    <li class="nav-item nav-link"><%= link_to @user.name, user_path(@user) %></li>
+    <li class="nav-item nav-link active"><%= link_to "お気に入りルーム", myrooms_user_path(@user) %></li>
+  </ul>
+  <ul class="list-unstyled">
+    <%= render 'users/myroom_list', favorites: @favorites %>
+  </ul>
+</div>
+<div class="col-sm-2"></div>

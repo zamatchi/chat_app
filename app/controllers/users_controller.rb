@@ -34,6 +34,12 @@ class UsersController < ApplicationController
     end
   end
   
+  # def favorites
+  def myrooms
+    @user = User.find(params[:id])
+    @favorites = @user.favoritings.page(params[:page]).per(15)
+  end
+  
   private
   
   def user_params

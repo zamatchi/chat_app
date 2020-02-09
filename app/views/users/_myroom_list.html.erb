@@ -1,0 +1,5 @@
+<% favorites.each do |favorite| %>
+  <li><%= link_to favorite.name, chatroom_path(favorite) %></li>
+  <li class="border-bottom"><%= favorite.genre %> > <%=favorite.target %> > <%= favorite.comment %></li>
+<% end %>
+<%= paginate favorites %>

@@ -1,14 +1,19 @@
 <div class="col-sm-8">
-  <div class="text-center mb-5">
-    <h2><span style="border-bottom: solid 1px;"><%= "#{@chatroom.name}の部屋" %></span></h2>
-  </div>
-  
-  <% if current_user == @chatroom.user %>
-    <div class="text-right">
-      <%= link_to "編集", edit_chatroom_path(@chatroom), class: "btn edit_btn" %>
-      <%= link_to "削除", @chatroom, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn btn-danger" %>
+  <div>
+    <div class="text-center mb-5">
+      <h2><span style="border-bottom: solid 1px;"><%= "#{@chatroom.name}の部屋" %></span></h2>
     </div>
-  <% end %>
+    <div class="text-left">
+      <%= render 'user_chatrooms/favorite', chatroom: @chatroom %>
+    </div>
+    
+    <% if current_user == @chatroom.user %>
+      <div class="text-right">
+        <%= link_to "編集", edit_chatroom_path(@chatroom), class: "btn btn-info btn-sm" %>
+        <%= link_to "削除", @chatroom, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: "btn btn-danger btn-sm" %>
+      </div>
+    <% end %>
+  </div>
   
   <!--チャット画面全体全体-->
   <div class="box mx-auto">
@@ -21,7 +26,6 @@
         <div class="room_messages">
           
           <div id="posts">
-            <%#= render @posts %>
             <%= render 'posts/post', posts: @posts %>
           </div>
           <!--<p name="choice"></p> 「location.hash使えなかった」-->
@@ -162,12 +166,6 @@
     border: 1px solid #bbb;
     border-radius: 4px;
     box-sizing: border-box;
-  }
-  
-  
-  /*編集ボタン*/
-  .edit_btn{
-    background-color: #eee;
   }
  
 </style>
