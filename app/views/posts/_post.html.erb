@@ -1,37 +1,34 @@
-<% posts.each_with_index do |post, num| %>
-  
-  <!--相手側-->
-  <% unless post.user_id == current_user.id %>
-    <div class="room_message room_left">
-      <div class="room_message_box">
-        <div class="room_message_content">
-          <div class="room_message_text">
-            <%= simple_format(h(text_url_to_link(post.content).html_safe), {style: "color:red;"}, {wrapper_tag: "div", sanitize: false}) %>
-          </div>
+<!--相手側-->
+<% unless post.user_id == current_user.id %>
+  <div class="room_message room_left">
+    <div class="room_message_box">
+      <div class="room_message_content">
+        <div class="room_message_text">
+          <%= simple_format(h(text_url_to_link(post.content).html_safe), {style: "color:red;"}, {wrapper_tag: "div", sanitize: false}) %>
         </div>
       </div>
-      <div class="text-left">
-        <%= num + 1 %>: <%= link_to post.user.name, user_path(post.user) %>
-      </div>
     </div>
-    <div class="room_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
-  
-  <!--自分-->
-  <% else %>
-    <div class="room_message room_right">
-      <div class="room_message_box">
-        <div class="room_message_content">
-          <div class="room_message_text">
-            <%= simple_format(h(text_url_to_link(post.content).html_safe), {style: "color:red;"}, {wrapper_tag: "div", sanitize: false}) %>
-          </div>
+    <div class="text-left">
+      <%= post.id %>: <%= link_to post.user.name, user_path(post.user) %>
+    </div>
+  </div>
+  <div class="room_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
+
+<!--自分-->
+<% else %>
+  <div class="room_message room_right">
+    <div class="room_message_box">
+      <div class="room_message_content">
+        <div class="room_message_text">
+          <%= simple_format(h(text_url_to_link(post.content).html_safe), {style: "color:red;"}, {wrapper_tag: "div", sanitize: false}) %>
         </div>
       </div>
-      <div class="text-right">
-        <%= num + 1 %>: <%= link_to current_user.name, user_path(current_user) %>
-      </div>
     </div>
-    <div class="room_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
-  <% end %>
+    <div class="text-right">
+      <%= post.id %>: <%= link_to current_user.name, user_path(current_user) %>
+    </div>
+  </div>
+  <div class="room_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
 <% end %>
       
 <style scoped>
@@ -151,4 +148,3 @@
   }
  
 </style>
-

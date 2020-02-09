@@ -28,7 +28,8 @@
         <div class="room_messages">
           
           <div id="posts">
-            <%= render 'posts/post', posts: @posts %>
+            <%#= render 'posts/post', posts: @posts %>
+            <%= render @posts %>
           </div>
           <!--<p name="choice"></p> 「location.hash使えなかった」-->
        </div>
