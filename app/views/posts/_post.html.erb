@@ -9,7 +9,8 @@
       </div>
     </div>
     <div class="text-left">
-      <%= post.id %>: <%= link_to post.user.name, user_path(post.user) %>
+      <!--<%#= post.id %>: <%#= link_to post.user.name, user_path(post.user) %>-->
+      <%= post_counter + 1 %>: <%= link_to post.user.name, user_path(post.user) %>
     </div>
   </div>
   <div class="room_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
@@ -25,7 +26,8 @@
       </div>
     </div>
     <div class="text-right">
-      <%= post.id %>: <%= link_to current_user.name, user_path(current_user) %>
+      <!--<%#= post.id %>: <%#= link_to current_user.name, user_path(current_user) %>-->
+      <%= post_counter + 1 %>: <%= link_to current_user.name, user_path(current_user) %>
     </div>
   </div>
   <div class="room_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
