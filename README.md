@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+アプリの概要
 
-Things you may want to cover:
+* 好きなルームでのチャットや質問の投稿
 
-* Ruby version
+* ルーム作成機能により、好きなルームの作成が可能
 
-* System dependencies
+* ルーム検索機能により、既存のルームから検索が可能
 
-* Configuration
+* 質問に対して、ベストアンサーを選択することが可能
 
-* Database creation
+* ActionCableを用いてリアルタイムチャットの可能
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* 多対多のリレーションシップを用いたお気に入り機能
